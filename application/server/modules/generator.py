@@ -1,5 +1,4 @@
-import enum
-from random import choice
+from random import choice, getrandbits
 from midiutil import MIDIFile
 
 
@@ -9,11 +8,12 @@ class Scale:
     notes = []
     chords = {}
     progression = []
+    midiname = 0
 
     # list of all notes
     all_notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 
-    # list of all possible chords in a key
+    # list of types of chords
     all_chords = {
         'major' : ['Major', 'Major', 'Minor', 'Major', 'Major', 'Minor', 'Minor'], 
         'minor' : ['Minor', 'Dimnished', 'Major', 'Minor', 'Minor', 'Major', 'Major']
@@ -28,6 +28,7 @@ class Scale:
     def __init__(self, key, mode):
         self.key = key
         self.mode = mode
+        self.midiname = getrandbits(32)
 
         # set notes in scale
         self.notes.append(self.key)
@@ -53,8 +54,10 @@ class Scale:
             chord_choice = choice(list(self.chords.keys()))
             self.progression.append({chord_choice:self.chords[chord_choice]})
         
-        base = 60
+        base = 60 # key of C5 in midi
         degrees = []
+
+        # add notes to midi
         for chords in self.progression:
             for chord in chords:
                 for note in chords[chord]:
@@ -63,6 +66,7 @@ class Scale:
 
         midi.addTempo(0, 0, 140)
 
+        # append chords to file
         loop_index = 0
         for i in range(0,4):
             for note in range(0,3):
@@ -70,14 +74,5 @@ class Scale:
                 midi.addNote(0, 0, pitch, 4*i, 4 ,100)
                 loop_index += 1
         
-        with open("major-scale.mid", "wb") as output_file:
+        with open(f"application/server/static/{self.midiname}.mid", "wb") as output_file:
             midi.writeFile(output_file)
-
-        
-
-cminor = Scale('C', 'minor')
-cminor.generate()
-print(cminor.progression)
-
-
-## fix chord notation
