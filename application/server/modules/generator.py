@@ -7,16 +7,16 @@ class Scale:
     key = 0
     notes = []
     chords = {}
-    progression = []
+    progression = {'chords': []}
     midiname = 0
 
     # list of all notes
-    all_notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
+    all_notes = ['c', 'c#', 'd', 'd#', 'e', 'f', 'f#', 'g', 'g#', 'a', 'a#', 'b']
 
     # list of types of chords
     all_chords = {
-        'major' : ['Major', 'Major', 'Minor', 'Major', 'Major', 'Minor', 'Minor'], 
-        'minor' : ['Minor', 'Dimnished', 'Major', 'Minor', 'Minor', 'Major', 'Major']
+        'major' : ['major', 'major', 'minor', 'major', 'major', 'minor', 'minor'], 
+        'minor' : ['minor', 'dimnished', 'major', 'minor', 'minor', 'major', 'major']
         }
     
     # key construction
@@ -42,25 +42,27 @@ class Scale:
         
         for i, name in enumerate(self.all_chords[mode]):
             chord_index = i
-            chord = []
+            chord = {'notes': []}
             chord_name = f'{self.notes[chord_index]} {name}'
             for i in range(0,3):
-                chord.append(self.notes[chord_index])
+                chord['notes'].append(self.notes[chord_index])
                 chord_index += 2
             self.chords[chord_name] = chord
     
+    # generate random progression out of possible chords
+
     def generate(self):
         for i in range(0,4):
             chord_choice = choice(list(self.chords.keys()))
-            self.progression.append({chord_choice:self.chords[chord_choice]})
+            self.progression['chords'].append({chord_choice:self.chords[chord_choice]})
         
         base = 60 # key of C5 in midi
         degrees = []
 
         # add notes to midi
-        for chords in self.progression:
+        for chords in self.progression['chords']:
             for chord in chords:
-                for note in chords[chord]:
+                for note in chords[chord]['notes']:
                     degrees.append(60 + self.all_notes.index(note))
         midi = MIDIFile(1)
 
@@ -74,5 +76,6 @@ class Scale:
                 midi.addNote(0, 0, pitch, 4*i, 4 ,100)
                 loop_index += 1
         
-        with open(f"application/server/static/{self.midiname}.mid", "wb") as output_file:
+        with open(f"application/server/static/midi-files/{self.midiname}.mid", "wb") as output_file:
             midi.writeFile(output_file)
+    

@@ -1,0 +1,29 @@
+### Tests made using 'REST Client' a VS Code Extension
+
+### Variables
+@hostname = http://127.0.0.1:5000
+@generator = http://127.0.0.1:5000/generate
+
+get {{hostname}}
+
+### test if minor keys work
+
+post {{generator}}
+Content-Type: application/json
+
+{
+    "key": "c",
+    "mode": "minor"
+}
+
+### test if major keys work
+post {{generator}}
+Content-Type: application/json
+
+{
+    "key": "c",
+    "mode": "major"
+}
+
+### test if return file works
+get {{hostname}}/2759633006
