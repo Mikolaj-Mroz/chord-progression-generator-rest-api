@@ -2,9 +2,10 @@
 
 ## Table of contents
 
-* [Introduction](*introduction)
-* [Technologies](*technologies)
-* [Setup](*setup)
+* [Introduction](#introduction)
+* [Technologies](#technologies)
+* [Setup](#setup)
+* [How to use](#how-to-use)
 
 ## Introduction
 
@@ -34,7 +35,7 @@ $ python run.py
 
 ## Examples of use
 
-### Generate progression
+### How to use
 
 To generate progression you need to send a POST request to running server on [http://127.0.0.1:5000/generate](http://127.0.0.1:5000/generate) with parameters:
 
