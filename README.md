@@ -48,4 +48,4 @@ To view already generated progressions visit [http://127.0.0.1:5000](http://127.
 
 ### Download midi file
 
-To download already generated midi file visit [http://127.0.0.1:5000](http://127.0.0.1:5000)/<midi file name>
+To download already generated midi file visit [http://127.0.0.1:5000](http://127.0.0.1:5000)/midi-file-name
