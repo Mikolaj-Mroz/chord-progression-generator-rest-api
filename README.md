@@ -33,9 +33,9 @@ Then all you have to do is run **run.py** file.
 $ python run.py
 ```
 
-## Examples of use
+## How to use
 
-### How to use
+### Generate new progression
 
 To generate progression you need to send a POST request to running server on [http://127.0.0.1:5000/generate](http://127.0.0.1:5000/generate) with parameters:
 
