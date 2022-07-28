@@ -37,7 +37,7 @@ class Generate(Resource):
 
 class ReturnFile(Resource):
     def get(self, filename):
-        return send_file('static/midi-files/' + filename + '.mid')
+        return send_file('static/' + filename + '.mid')
 
 
 api.add_resource(Progressions, '/')
