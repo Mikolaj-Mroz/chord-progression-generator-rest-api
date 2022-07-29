@@ -76,6 +76,6 @@ class Scale:
                 midi.addNote(0, 0, pitch, 4*i, 4 ,100)
                 loop_index += 1
         
-        with open(f"application/server/static/midi-files/{self.midiname}.mid", "wb") as output_file:
+        with open(f"application/server/static/{self.midiname}.mid", "wb") as output_file:
             midi.writeFile(output_file)
     
