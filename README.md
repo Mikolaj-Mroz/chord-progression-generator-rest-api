@@ -21,16 +21,26 @@ Project is created with:
 
 ## Setup
 
-To run this project first install requirements.
+To run this project first create virtual env.
+```
+$ python -m venv .venv
+```
+
+Then activate that env.
+```
+$ source .venv/scripts/activate
+```
+
+Next install requirements.
 
 ```
-$ pip install -r 'requirements.txt'
+(.venv) $ pip install -r 'requirements.txt'
 ```
 
 Then all you have to do is run **run.py** file.
 
 ```
-$ python run.py
+(.venv) $ python run.py
 ```
 
 ## How to use
